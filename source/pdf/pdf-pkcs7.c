@@ -105,8 +105,7 @@ static long bsegs_callback_ctrl(BIO *b, int cmd, bio_info_cb *fp)
 	return BIO_callback_ctrl(b->next_bio, cmd, fp);
 }
 
-static BIO_METHOD methods_bsegs =
-{
+static BIO_METHOD methods_bsegs = {
 	0,"segment reader",
 	NULL,
 	bsegs_read,

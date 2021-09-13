@@ -1,5 +1,7 @@
 #include "pdfapp.h"
-#include "curl_stream.h"
+
+/* kuesji-comment curl_stream
+#include "curl_stream.h" */
 
 #define BEYOND_THRESHHOLD 40
 #ifndef PATH_MAX

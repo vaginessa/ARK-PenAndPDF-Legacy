@@ -1,7 +1,8 @@
 /* Simple example fz_stream implementation using curl */
 
 #include "mupdf/fitz.h"
-#include "curl_stream.h"
+/* kuesji-comment curl_stream
+#include "curl_stream.h" */
 
 #define CURL_STATICLIB
 #include <curl/curl.h>

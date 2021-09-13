@@ -72,10 +72,11 @@ else ifeq "$(OS)" "Linux"
 HAVE_X11 ?= yes
 HAVE_GLUT ?= yes
 
-ifeq "$(shell pkg-config --exists libcrypto && echo yes)" "yes"
-SYS_OPENSSL_CFLAGS = -DHAVE_OPENSSL $(shell pkg-config --cflags libcrypto)
-SYS_OPENSSL_LIBS = $(shell pkg-config --libs libcrypto)
-endif
+# kuesji-comment openssl
+#ifeq "$(shell pkg-config --exists libcrypto && echo yes)" "yes"
+#SYS_OPENSSL_CFLAGS = -DHAVE_OPENSSL $(shell pkg-config --cflags libcrypto)
+#SYS_OPENSSL_LIBS = $(shell pkg-config --libs libcrypto)
+#endif
 
 ifeq "$(shell pkg-config --exists libcurl && echo yes)" "yes"
 HAVE_CURL = yes
