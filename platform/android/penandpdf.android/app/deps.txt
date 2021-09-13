@@ -1,0 +1,14 @@
+AndroidManifest.xml
+appcompat
+build.sh
+build.xml
+cardview
+ClassStructure.txt
+design
+googleplayresources
+jni
+proguard-project.txt
+project.properties
+recyclerview
+res
+src

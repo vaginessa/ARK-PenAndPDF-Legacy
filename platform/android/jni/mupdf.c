@@ -101,7 +101,10 @@ static const jchar PDFDocEncoding[] = {
 
 typedef struct rect_node_s rect_node;
 
-typedef enum { false, true } bool;
+
+/* kuesji-edit bool? */
+#define true 1
+#define false 0
 
 struct rect_node_s
 {
@@ -2172,8 +2175,7 @@ JNI_FN(MuPDFCore_getWidgetAreasInternal)(JNIEnv * env, jobject thiz, int pageNum
 	return arr;
 }
 
-JNIEXPORT jobjectArray JNICALL
-JNI_FN(MuPDFCore_getAnnotationsInternal)(JNIEnv * env, jobject thiz, int pageNumber)
+JNIEXPORT jobjectArray JNICALL JNI_FN(MuPDFCore_getAnnotationsInternal)(JNIEnv * env, jobject thiz, int pageNumber)
 {
 	jclass annotClass, pt_cls, ptarr_cls;
     jfieldID x_fid, y_fid;
@@ -2188,12 +2190,12 @@ JNI_FN(MuPDFCore_getAnnotationsInternal)(JNIEnv * env, jobject thiz, int pageNum
     page_cache *pc;
     globals *glo = get_globals(env, thiz);
     fz_context *ctx = glo->ctx;
-    
-    if (glo == NULL) return;
+
+    if (glo == NULL) return NULL;
 
     annotClass = (*env)->FindClass(env, PACKAGENAME "/Annotation");
     if (annotClass == NULL) fz_throw(ctx, FZ_ERROR_GENERIC, "FindClass");
-    
+
     Annotation = (*env)->GetMethodID(env, annotClass, "<init>", "(FFFFI[[Landroid/graphics/PointF;Ljava/lang/String;)V"); 
     if (Annotation == NULL) fz_throw(ctx, FZ_ERROR_GENERIC, "GetMethodID");
 
@@ -2204,7 +2206,7 @@ JNI_FN(MuPDFCore_getAnnotationsInternal)(JNIEnv * env, jobject thiz, int pageNum
     y_fid = (*env)->GetFieldID(env, pt_cls, "y", "F");
     if (y_fid == NULL) fz_throw(ctx, FZ_ERROR_GENERIC, "GetFieldID(y)");
     PointF = (*env)->GetMethodID(env, pt_cls, "<init>", "(FF)V");
-    
+
     JNI_FN(MuPDFCore_gotoPageInternal)(env, thiz, pageNumber);
     pc = &glo->pages[glo->current];
     if (pc->number != pageNumber || pc->page == NULL)

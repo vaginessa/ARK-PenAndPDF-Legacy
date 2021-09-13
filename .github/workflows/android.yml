@@ -1,0 +1,50 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+        
+    - name: setup dependencies
+      run: |
+        sudo apt-get -y install mesa-common-dev libxcursor-dev libxrandr-dev libxinerama-dev xorg-dev 
+        
+    - name: compile native
+      run: |
+        git submodule update --init
+        make -j4
+    
+    - name: install ndk
+      run: |
+        echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;23.0.7599858" --sdk_root=${ANDROID_SDK_ROOT}
+    
+    - name: compile ndk
+      working-directory: platform/android
+      run: sh build.sh
+      
+    - name: build with gradle
+      working-directory: platform/android/penandpdf.android
+      run: |
+        chmod +x gradlew
+        ./gradlew build
+    
+    - name: upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: debug-apk
+        path: platform/android/penandpdf.android/app/build/outputs/apk/debug/app-debug.apk
