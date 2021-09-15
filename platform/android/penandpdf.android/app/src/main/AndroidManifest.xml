@@ -24,8 +24,7 @@
 			android:name="PenAndPDFFileChooser"
 			android:theme="@style/PenAndPDFTheme"
 			android:label="@string/app_name"
-			android:launchMode="standard"
-			android:permission="com.cgogolin.penandpdf.LAUNCH_PEN_AND_PDF_FILE_CHOOSER">
+			android:launchMode="standard">
 			<intent-filter>
 				<action android:name="android.intent.action.PICK"/>
 				<action android:name="android.intent.action.EDIT"/>
