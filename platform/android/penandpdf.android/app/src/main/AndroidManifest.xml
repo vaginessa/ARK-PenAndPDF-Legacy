@@ -24,7 +24,8 @@
 			android:name="PenAndPDFFileChooser"
 			android:theme="@style/PenAndPDFTheme"
 			android:label="@string/app_name"
-			android:launchMode="standard">
+			android:launchMode="standard"
+			android:permission="com.cgogolin.penandpdf.LAUNCH_PEN_AND_PDF_FILE_CHOOSER">
 			<intent-filter>
 				<action android:name="android.intent.action.PICK"/>
 				<action android:name="android.intent.action.EDIT"/>
@@ -67,6 +68,23 @@
 				<data android:mimeType="*/*"/>
 				<data android:pathPattern="/.*\\.pdf"/>
 				<data android:host="*"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.PICK"/>
+				<action android:name="android.intent.action.EDIT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:mimeType="application/pdf"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.PICK"/>
+				<action android:name="android.intent.action.EDIT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:scheme="content"/>
+				<data android:scheme="file"/>
+				<data android:host="*"/>
+				<data android:pathPattern=".*\\.pdf"/>
 			</intent-filter>
 		</activity>
 		<activity
