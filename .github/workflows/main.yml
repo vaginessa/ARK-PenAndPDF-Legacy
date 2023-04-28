@@ -44,7 +44,7 @@ jobs:
         ./gradlew build
     
     - name: upload
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: debug-apk
         path: platform/android/penandpdf.android/app/build/outputs/apk/debug/app-debug.apk
